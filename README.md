@@ -12,3 +12,58 @@ The system captures continuous behavioral timing metrics (dwell time, flight tim
 ---
 
 ## 🏗️ System Architecture
+
+```text
+                               ┌─────────────────────────────────────────┐
+                               │       GitHub Actions CI/CD Pipeline     │
+                               └────────────────────┬────────────────────┘
+                                                    │
+                             OIDC Keyless Auth      │ Workload Identity
+                             (Zero Static Keys)     ▼ Federation
+                               ┌─────────────────────────────────────────┐
+                               │    Google Cloud Platform (GCP) IAM      │
+                               └────────────────────┬────────────────────┘
+                                                    │
+                                                     ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Google Cloud BigQuery ML Engine (`meta-coral-456317-g8`)                                        │
+│                                                                                                 │
+│  ┌──────────────────────────────┐     ┌──────────────────────────────────────────────────────┐  │
+│  │  Keystroke Baseline Table    │ ──> │ XGBoost Risk Model (`BOOSTED_TREE_CLASSIFIER`)       │  │
+│  │  - Human (Class 0)           │     │ - Auto Class Weights enabled                         │  │
+│  │  - Bot Injections (Class 1)  │     │ - Kinematic Feature Ratios                           │  │
+│  └──────────────────────────────┘     └──────────────────────────┬───────────────────────────┘  │
+│                                                                  │                              │
+│                                                                  ▼                              │
+│                                       ┌──────────────────────────────────────────────────────┐  │
+│                                       │ ML.PREDICT Real-Time Risk Probability Output         │  │
+│                                       │ (Continuous Session Scoring)                         │  │
+│                                       └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────────────────────────────────┘
+---
+
+## ✨ Key Features & Engineering Highlights
+
+* **🔒 Keyless OIDC Authentication:** Eliminates static service account keys by using GCP **Workload Identity Federation** to grant ephemeral token access to GitHub Actions workflows, satisfying SOC2 & ISO27001 zero-trust compliance.
+* **🚀 Production XGBoost Architecture:** Built on an optimized **XGBoost (`BOOSTED_TREE_CLASSIFIER`)** algorithm to handle non-linear micro-behavioral timing anomalies.
+* **📐 Kinematic Feature Engineering:** Derived predictive domain features from raw keystroke dynamics:
+  * `cadence_intensity`: $Dwell\_Time \times Speed\_CPS$ (Primary indicator for automated script bursts).
+  * `timing_asymmetry`: $\vert{}Dwell\_Time - Flight\_Time\vert{}$ (Catches artificial bot consistency).
+  * `dwell_to_flight_ratio`: Kinematic pause separation.
+
+---
+
+## 📂 Project Structure
+
+The repository is organized into core ML automation and full-stack runtime components:
+
+```text
+.
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # GitHub Actions CI/CD pipeline (Workload Identity Auth)
+├── frontend/                   # Frontend application user interface code
+├── backend/                    # Node.js/Express server code to proxy Cloud API calls
+├── sql/
+│   └── train_model.sql         # Production XGBoost training query & feature logic
+└── README.md                   # System documentation
