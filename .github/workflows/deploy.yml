@@ -25,4 +25,21 @@ jobs:
 
       - name: Execute BQML Training
         run: |
-          bq query --use_legacy_sql=false --location=US < sql/train_model.sql
+          MAX_ATTEMPTS=5
+          RETRY_DELAY=10
+          
+          for attempt in $(seq 1 $MAX_ATTEMPTS); do
+            echo "Attempt $attempt of $MAX_ATTEMPTS..."
+            if bq query --use_legacy_sql=false --location=US --nouse_cache < sql/train_model.sql; then
+              echo "✓ Query succeeded"
+              exit 0
+            fi
+            
+            if [ $attempt -lt $MAX_ATTEMPTS ]; then
+              echo "⏳ Query failed. Waiting ${RETRY_DELAY}s before retry..."
+              sleep $RETRY_DELAY
+            fi
+          done
+          
+          echo "✗ Query failed after $MAX_ATTEMPTS attempts"
+          exit 1
