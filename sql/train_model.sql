@@ -1,4 +1,8 @@
-CREATE OR REPLACE MODEL `forward-sentry-456317-k6.bioauth_dataset.bioauth_risk_model`
+-- First, drop the model if it exists to avoid concurrent update issues
+DROP MODEL IF EXISTS `forward-sentry-456317-k6.bioauth_dataset.bioauth_risk_model`;
+
+-- Then create a fresh model
+CREATE MODEL `forward-sentry-456317-k6.bioauth_dataset.bioauth_risk_model`
 OPTIONS(
   model_type='logistic_reg', 
   input_label_cols=['anomaly_label']
