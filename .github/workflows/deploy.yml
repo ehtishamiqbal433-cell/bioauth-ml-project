@@ -15,7 +15,6 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v3
         with:
-          # Use a repo secret named GCP_PROJECT_NUMBER that contains the NUMERIC GCP project number.
           workload_identity_provider: 'projects/135217867785/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider'
           service_account: 'zta-bioauth-app@forward-sentry-456317-k6.iam.gserviceaccount.com'
 
@@ -26,19 +25,4 @@ jobs:
 
       - name: Execute BQML Training
         run: |
-          bq query --use_legacy_sql=false < sql/train_model.sql
-
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v3
-        with:
-          workload_identity_provider: 'projects/135217867785/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider'
-          service_account: 'zta-bioauth-app@forward-sentry-456317-k6.iam.gserviceaccount.com'
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v3
-        with:
-          project_id: 'forward-sentry-456317-k6'
-
-      - name: Execute BQML Training
-        run: |
-          bq query --use_legacy_sql=false < sql/train_model.sql
+          bq query --use_legacy_sql=false < sql/train_model.sqle < sql/train_model.sql
