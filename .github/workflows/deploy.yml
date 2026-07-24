@@ -25,4 +25,4 @@ jobs:
 
       - name: Execute BQML Training
         run: |
-          bq query --use_legacy_sql=false < sql/train_model.sqle < sql/train_model.sql
+          bq query --use_legacy_sql=false < sql/train_model.sql
