@@ -1,4 +1,3 @@
-cat << 'EOF' > README.md
 # 🛡️ Zero Trust BioAuth MLOps Pipeline & BigQuery ML Engine
 
 [![GCP BigQuery ML](https://img.shields.io/badge/GCP-BigQuery_ML-4285F4?logo=google-cloud&logoColor=white)](https://cloud.google.com/bigquery)
