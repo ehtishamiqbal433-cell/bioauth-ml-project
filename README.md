@@ -5,6 +5,12 @@
 [![Security: Keyless WIF](https://img.shields.io/badge/Security-Workload_Identity_Federation-00C7B7?logo=google-cloud&logoColor=white)](https://cloud.google.com/iam/docs/workload-identity-federation)
 [![Model: XGBoost](https://img.shields.io/badge/ML-XGBoost_Classifier-FF6F00?logo=xgboost&logoColor=white)](https://xgboost.readthedocs.io/)
 ![Live Model ROC AUC](badge.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Node.js](https://img.shields.io/badge/Node.js-20.x-green)
+![Google Cloud](https://img.shields.io/badge/Google%20Cloud-BigQuery%20ML-blue)
+![XGBoost](https://img.shields.io/badge/Model-XGBoost-orange)
+![Zero Trust](https://img.shields.io/badge/Security-Zero%20Trust-red)
+![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF)
 
 **GCP BigQuery ML • GitHub Actions • Zero Trust Security • Keyless Workload Identity Federation • XGBoost**
 
