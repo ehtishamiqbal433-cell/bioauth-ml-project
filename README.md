@@ -16,35 +16,29 @@ The platform continuously captures user typing behavior, engineers high-value ki
 
 # 🏗️ System Architecture
 
-```text
-                               ┌─────────────────────────────────────────┐
-                               │       GitHub Actions CI/CD Pipeline     │
-                               └────────────────────┬────────────────────┘
-                                                    │
-                             OIDC Keyless Auth      │ Workload Identity
-                             (Zero Static Keys)     ▼ Federation
-                               ┌─────────────────────────────────────────┐
-                               │    Google Cloud Platform (GCP) IAM      │
-                               └────────────────────┬────────────────────┘
-                                                    │
-                                                     ▼
-┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ Google Cloud BigQuery ML Engine (`meta-coral-456317-g8`)                                        │
-│                                                                                                 │
-│  ┌──────────────────────────────┐     ┌──────────────────────────────────────────────────────┐  │
-│  │  Keystroke Baseline Table    │ ──> │ XGBoost Risk Model (`BOOSTED_TREE_CLASSIFIER`)       │  │
-│  │  - Human (Class 0)           │     │ - Auto Class Weights Enabled                         │  │
-│  │  - Bot Sessions (Class 1)    │     │ - Feature Engineering                                │  │
-│  └──────────────────────────────┘     └──────────────────────────┬───────────────────────────┘  │
-│                                                                  │                              │
-│                                                                  ▼                              │
-│                                       ┌──────────────────────────────────────────────────────┐  │
-│                                       │ ML.PREDICT Risk Probability Output                   │  │
-│                                       │ Continuous Session Authentication                    │  │
-│                                       └──────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+```mermaid
+flowchart TB
 
+    GH["GitHub Actions<br/>CI/CD Pipeline"]
+
+    IAM["Google Cloud IAM<br/>Workload Identity Federation"]
+
+    subgraph GCP["Google Cloud Platform"]
+        subgraph BQ["BigQuery ML Engine"]
+            DATA["Keystroke Baseline Dataset<br/><br/>Human (Class 0)<br/>Bot (Class 1)"]
+
+            MODEL["XGBoost Model<br/>BOOSTED_TREE_CLASSIFIER<br/><br/>Auto Class Weights<br/>Feature Engineering"]
+
+            PRED["ML.PREDICT<br/>Real-Time Risk Score"]
+        end
+    end
+
+    GH -- "OIDC Authentication" --> IAM
+    IAM --> MODEL
+
+    DATA --> MODEL
+    MODEL --> PRED
+```
 ---
 
 # ✨ Key Features & Engineering Highlights
