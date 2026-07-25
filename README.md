@@ -1,5 +1,4 @@
-# 🛡️ Zero Trust BioAuth MLOps Pipeline & BigQuery ML Engine
-
+# 🛡️ Enterprise-grade Zero Trust continuous authentication using keystroke dynamics, Google Cloud BigQuery ML (XGBoost), and GitHub Actions Workload Identity Federation (Zero Trust BioAuth MLOps Pipeline & BigQuery ML Engine)
 [![GCP BigQuery ML](https://img.shields.io/badge/GCP-BigQuery_ML-4285F4?logo=google-cloud&logoColor=white)](https://cloud.google.com/bigquery)
 [![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub_Actions-2088FF?logo=github-actions&logoColor=white)](https://github.com/features/actions)
 [![Security: Keyless WIF](https://img.shields.io/badge/Security-Workload_Identity_Federation-00C7B7?logo=google-cloud&logoColor=white)](https://cloud.google.com/iam/docs/workload-identity-federation)
