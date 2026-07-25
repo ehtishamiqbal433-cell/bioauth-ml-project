@@ -1,6 +1,9 @@
 {
-  "name": "zero-trust-behavioral-biometrics",
-  "workspaces": ["frontend", "backend"], 
+  "name": "@ehtishamiqbal433-cell/bioauth-ml-project",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
     "dev-frontend": "npm run dev --prefix frontend",
     "dev-backend": "npm run dev --prefix backend",
@@ -8,5 +11,12 @@
   },
   "devDependencies": {
     "concurrently": "latest"
+  },
+  "publishConfig": {
+    "@ehtishamiqbal433-cell:registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehtishamiqbal433-cell/bioauth-ml-project.git"
   }
 }
