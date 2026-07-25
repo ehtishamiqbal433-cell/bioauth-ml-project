@@ -68,6 +68,28 @@ The repository is organized into core ML automation and full-stack runtime compo
 │   └── train_model.sql         # Production XGBoost training query & feature logic
 └── README.md                   # System documentation
 
+<svg xmlns="http://www.w3.org/2000/svg" width="168" height="20" role="img" aria-label="ROC AUC: 0.9789">
+  <linearGradient id="b" x2="0" y2="100%">
+    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <mask id="a">
+    <rect width="168" height="20" rx="3" fill="#fff"/>
+  </mask>
+  <g mask="url(#a)">
+    <rect width="75" height="20" fill="#21262d"/>
+    <rect x="75" width="93" height="20" fill="#238636"/>
+    <rect width="168" height="20" fill="url(#b)"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="11">
+    <text x="38.5" y="14" fill="#010409" opacity=".3">ROC AUC</text>
+    <text x="38.5" y="13" fill="#f0f6fc">ROC AUC</text>
+    <text x="120.5" y="14" fill="#010409" opacity=".3">0.9789</text>
+    <text x="120.5" y="13" fill="#f0f6fc">0.9789</text>
+  </g>
+</svg>
+
+
 ## 📊 Live Model Evaluation Metrics
 
 Evaluated live against production holdout data via BigQuery ML:
