@@ -305,6 +305,9 @@ npm start
 * SIEM Integration
 * Multi-factor Continuous Authentication
 
+# 📋 Changelog
+
+See the [CHANGELOG.md](CHANGELOG.md) file for a complete history of project updates and releases.
 ---
 
 ## 📜 License
