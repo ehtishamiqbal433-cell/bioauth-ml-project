@@ -90,30 +90,29 @@ flowchart TB
 .
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml
+│       └── deploy.yml          # GitHub Actions CI/CD
 │
 ├── backend/
-│   ├── server.js
-│   ├── routes/
-│   ├── controllers/
+│   ├── server.js               # Express API
+│   ├── routes/                 # API routes
+│   ├── controllers/            # Business logic
 │   └── package.json
 │
 ├── frontend/
-│   ├── src/
-│   ├── public/
+│   ├── src/                    # Frontend source
+│   ├── public/                 # Static assets
 │   └── package.json
 │
 ├── sql/
-│   ├── train_model.sql
-│   └── predict.sql
+│   ├── train_model.sql         # BigQuery ML training
+│   └── predict.sql             # Real-time prediction
 │
 ├── assets/
-│   └── roc_auc.svg
+│   └── roc_auc.svg             # Performance badge
 │
 └── README.md
-```
 
----
+```
 
 # ⚙️ Technology Stack
 
