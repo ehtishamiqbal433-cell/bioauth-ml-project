@@ -194,6 +194,9 @@ The model was evaluated on a production holdout dataset using **BigQuery ML**.
 * ✅ F1 Score: **93.21%**
 * ✅ Log Loss: **0.1842**
 
+## 🌐 Live Demo
+
+https://bioauth-ml-project.vercel.app
 ---
 
 # 🔄 Continuous Authentication Workflow
