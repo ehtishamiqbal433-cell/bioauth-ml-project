@@ -1,5 +1,11 @@
 # 🛡️ Zero Trust BioAuth MLOps Pipeline & BigQuery ML Engine
 
+[![GCP BigQuery ML](https://img.shields.io/badge/GCP-BigQuery_ML-4285F4?logo=google-cloud&logoColor=white)](https://cloud.google.com/bigquery)
+[![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub_Actions-2088FF?logo=github-actions&logoColor=white)](https://github.com/features/actions)
+[![Security: Keyless WIF](https://img.shields.io/badge/Security-Workload_Identity_Federation-00C7B7?logo=google-cloud&logoColor=white)](https://cloud.google.com/iam/docs/workload-identity-federation)
+[![Model: XGBoost](https://img.shields.io/badge/ML-XGBoost_Classifier-FF6F00?logo=xgboost&logoColor=white)](https://xgboost.readthedocs.io/)
+![Live Model ROC AUC](badge.svg)
+
 **GCP BigQuery ML • GitHub Actions • Zero Trust Security • Keyless Workload Identity Federation • XGBoost**
 
 An enterprise-grade, serverless continuous authentication pipeline that enforces **Zero Trust Security** through **behavioral biometrics** using keystroke dynamics.
@@ -28,13 +34,13 @@ The platform continuously captures user typing behavior, engineers high-value ki
 │  ┌──────────────────────────────┐     ┌──────────────────────────────────────────────────────┐  │
 │  │  Keystroke Baseline Table    │ ──> │ XGBoost Risk Model (`BOOSTED_TREE_CLASSIFIER`)       │  │
 │  │  - Human (Class 0)           │     │ - Auto Class Weights Enabled                         │  │
-│  │  - Bot Sessions (Class 1)    │     │ - Feature Engineering                               │  │
+│  │  - Bot Sessions (Class 1)    │     │ - Feature Engineering                                │  │
 │  └──────────────────────────────┘     └──────────────────────────┬───────────────────────────┘  │
 │                                                                  │                              │
 │                                                                  ▼                              │
 │                                       ┌──────────────────────────────────────────────────────┐  │
-│                                       │ ML.PREDICT Risk Probability Output                  │  │
-│                                       │ Continuous Session Authentication                   │  │
+│                                       │ ML.PREDICT Risk Probability Output                   │  │
+│                                       │ Continuous Session Authentication                    │  │
 │                                       └──────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
