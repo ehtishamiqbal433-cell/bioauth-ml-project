@@ -17,3 +17,4 @@ SELECT
   anomaly_label
 FROM 
   `meta-coral-456317-g8.bioauth_ds.keystroke_behavioral_baselines`;
+-- Trigger BQML pipeline

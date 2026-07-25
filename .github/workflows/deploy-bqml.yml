@@ -7,17 +7,16 @@ on:
     paths:
       - 'sql/**'
       - '.github/workflows/deploy-bqml.yml'
-  workflow_dispatch: # Allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 permissions:
-  id-token: write # Required for OIDC / Workload Identity Federation
+  id-token: write
   contents: read
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     
-    # Environment variables set centrally for easy maintenance
     env:
       GCP_PROJECT_ID: 'meta-coral-456317-g8'
       BQ_LOCATION: 'US'
@@ -54,7 +53,6 @@ jobs:
           for attempt in $(seq 1 $MAX_ATTEMPTS); do
             echo "--- Attempt $attempt of $MAX_ATTEMPTS ---"
             
-            # Execute query and append output to log file
             if bq query \
               --use_legacy_sql=false \
               --location="${BQ_LOCATION}" \
@@ -68,7 +66,6 @@ jobs:
             if [ $attempt -lt $MAX_ATTEMPTS ]; then
               echo "⏳ Query failed (metadata lock/transient error). Waiting ${RETRY_DELAY}s..."
               sleep $RETRY_DELAY
-              # Optional: Double the delay for exponential backoff
               RETRY_DELAY=$((RETRY_DELAY * 2))
             fi
           done
