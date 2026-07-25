@@ -168,9 +168,7 @@ BOOSTED_TREE_CLASSIFIER
 
 The model was evaluated on a production holdout dataset using **BigQuery ML**.
 
-<p align="left">
-  <img src="assets/roc_auc.svg" alt="ROC AUC: 0.9789">
-</p>
+![ROC AUC](assets/roc_auc.svg)
 
 | Metric        |    Score   | Description                                                          |
 | :------------ | :--------: | :------------------------------------------------------------------- |
