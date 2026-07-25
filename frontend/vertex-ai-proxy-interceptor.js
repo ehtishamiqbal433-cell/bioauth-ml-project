@@ -17,9 +17,18 @@
       const MODEL_METHODS = ['generateContent', 'predict', 'streamGenerateContent'];
       const AGENT_METHODS = ['query', 'streamQuery'];
       const isSafePathSegment = (val) => val && encodeURIComponent(val) === val;
+      const isMainHost = (hostname) => hostname === HOST_NAME;
+      const isSubdomainOfMainHost = (hostname) => hostname.endsWith(`.${HOST_NAME}`);
+      const isReasoningEngineHost = (hostname) => {
+        if (!hostname.endsWith(`-${HOST_NAME}`)) {
+          return false;
+        }
+        const prefix = hostname.slice(0, -(`-${HOST_NAME}`).length);
+        return /^[a-z0-9-]+$/i.test(prefix);
+      };
 
       const urlObj = new URL(url);
-      if (!urlObj.hostname.endsWith(HOST_NAME)) {
+      if (!isMainHost(urlObj.hostname) && !isSubdomainOfMainHost(urlObj.hostname)) {
         return false;
       }
 
@@ -44,7 +53,7 @@
         pathSegments[0] === '' &&
         pathSegments[2] === 'projects' &&
         pathSegments[4] === 'locations' &&
-        pathSegments[6] === 'reasoningEngines' && urlObj.hostname.endsWith(`-${HOST_NAME}`)) {
+        pathSegments[6] === 'reasoningEngines' && isReasoningEngineHost(urlObj.hostname)) {
           if (!isSafePathSegment(pathSegments[1]) || !isSafePathSegment(pathSegments[3]) || !isSafePathSegment(pathSegments[5])) {
             return false;
           }
